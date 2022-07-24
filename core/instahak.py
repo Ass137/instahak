@@ -1,11 +1,9 @@
 import requests
 from  datetime import  datetime
 import json
-import dearpygui.dearpygui as dpg
 
 
 class InstaHak:
-
     def login(self, username, password):
         link = 'https://www.instagram.com/accounts/login/'
         login_url = 'https://www.instagram.com/accounts/login/ajax/'
@@ -29,16 +27,12 @@ class InstaHak:
 
         login_response = requests.post(login_url, data=payload, headers=login_header)
         json_data = json.loads(login_response.text)
-        print(json_data)
         try:
             if json_data["authenticated"]:
-                print("login successful", password)
                 cookies = login_response.cookies
                 cookie_jar = cookies.get_dict()
                 csrf_token = cookie_jar['csrftoken']
-                print("csrf_token: ", csrf_token)
                 session_id = cookie_jar['sessionid']
-                print("session_id: ", session_id)
                 return True
             else:
                 return False
